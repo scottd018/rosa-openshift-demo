@@ -1,4 +1,9 @@
 ---
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  name: application-lifecycle-demo
+---
 apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
