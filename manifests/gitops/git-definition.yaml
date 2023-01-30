@@ -5,9 +5,11 @@ metadata:
   name: application-lifecycle-demo
   namespace: openshift-gitops
 spec:
-  project: application-lifecycle-demo
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
   source:
-    path: manifests/openshift-manifests.yaml
+    path: manifests/application
     repoURL: https://github.com/scottd018/rosa-application-lifecycle-demo
   syncPolicy:
     automated:
