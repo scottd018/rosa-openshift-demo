@@ -1,5 +1,3 @@
-
-
 ---
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
