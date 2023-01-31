@@ -30,7 +30,7 @@ func Handle(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 		// if name is not provided, return an error
 		if body.Name == "" {
 			res.WriteHeader(http.StatusBadRequest)
-			res.Write([]byte(fmt.Sprintf("name value missing from body - expect {\"name\": \"value\"} format\n")))
+			res.Write([]byte(fmt.Sprintf("name missing from body - expect {\"name\": \"value\"} format\n")))
 
 			return
 		}

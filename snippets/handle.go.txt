@@ -22,7 +22,7 @@ func Handle(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 		// if body is not able to be decoded, return an error
 		if err := json.NewDecoder(req.Body).Decode(&body); err != nil {
 			res.WriteHeader(http.StatusBadRequest)
-			res.Write([]byte(fmt.Sprintf("unable to decode body - expect {\"name\": \"value\"} format")))
+			res.Write([]byte(fmt.Sprintf("unable to decode body - expect {\"name\": \"value\"} format\n")))
 
 			return
 		}
@@ -30,16 +30,16 @@ func Handle(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 		// if name is not provided, return an error
 		if body.Name == "" {
 			res.WriteHeader(http.StatusBadRequest)
-			res.Write([]byte(fmt.Sprintf("name missing from body - expect {\"name\": \"value\"} format")))
+			res.Write([]byte(fmt.Sprintf("name missing from body - expect {\"name\": \"value\"} format\n")))
 
 			return
 		}
 
 		// print the message and return a status ok
 		res.WriteHeader(http.StatusOK)
-		res.Write([]byte(fmt.Sprintf("hello, my name is: %s", body.Name)))
+		res.Write([]byte(fmt.Sprintf("hi, my name is: %s\n", body.Name)))
 	default:
 		res.WriteHeader(http.StatusInternalServerError)
-		res.Write([]byte(fmt.Sprintf("method [%s] unimplemented", req.Method)))
+		res.Write([]byte(fmt.Sprintf("method [%s] unimplemented\n", req.Method)))
 	}
 }
