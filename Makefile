@@ -1,24 +1,26 @@
+FUNC_DIR ?= demo
+
 clean:
-	rm -rf demo
+	rm -rf $(FUNC_DIR)
 
 create: clean
-	func create -l go demo
+	kn func create -l go $(FUNC_DIR)
 
 write-code:
-	@cp snippets/handle.go.txt demo/handle.go
-	@cp snippets/handle_test.go.txt demo/handle_test.go
+	@cp snippets/handle.go.txt $(FUNC_DIR)/handle.go
+	@cp snippets/handle_test.go.txt $(FUNC_DIR)/handle_test.go
 
 test:
-	cd demo && go test
+	cd $(FUNC_DIR) && go test
 
 build:
-	func build -p demo
+	kn func build -p $(FUNC_DIR)
 
 run:
-	func run -p demo --build=false
+	kn func run -p $(FUNC_DIR) --build=false
 
-test-curl-bad:
+test-e2e-bad:
 	curl -X GET localhost:8080
 
-test-curl-good:
-	curl -X POST localhost:8080 -d '{"name": "chicka chicka slim shady"}'
+test-e2e-good:
+	kn func invoke -p $(FUNC_DIR) --data '{"name": "chicka chicka slim shady"}'

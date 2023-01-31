@@ -1,0 +1,31 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test-e2e-knative
+  namespace: demo
+spec:
+  params:
+    - name: knativeDirectory
+      type: string
+      default: /workspace/code/demo
+      description: |
+        The folder to use for building the knative image.
+  steps:
+    - name: build-knative-image
+      image: quay.io/podman/stable:v4.3.1
+      script: |
+        #!/usr/bin/env bash
+        set -e
+        cd /workspace/code
+        dnf install -y make
+        make build
+  stepTemplate:
+    securityContext:
+      runAsUser: 0
+      privileged: true
+  workspaces:
+    - name: images
+      mountPath: /var/lib/containers
+    - name: workspace
+      mountPath: /workspace

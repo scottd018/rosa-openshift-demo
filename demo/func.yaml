@@ -1,21 +1,21 @@
 specVersion: 0.35.0
 name: demo
 runtime: go
-registry: ""
-image: ""
-imageDigest: ""
+registry: image-registry.openshift-image-registry.svc:5000/demo
+image: image-registry.openshift-image-registry.svc:5000/demo/demo:latest
+imageDigest: sha256:05ac593385fdced3ecaa87cfaf5c99a40a77166acb66cae5c2424881771200e8
 created: 2023-01-31T09:22:30.116443-06:00
 build:
   buildpacks:
   - paketo-buildpacks/go-dist
   - ghcr.io/boson-project/go-function-buildpack:tip
-  builder: ""
+  builder: pack
   buildEnvs: []
 run:
   volumes: []
   envs: []
 deploy:
-  namespace: ""
+  namespace: demo
   remote: false
   annotations: {}
   options: {}

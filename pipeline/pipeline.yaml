@@ -1,0 +1,51 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: deploy-knative-function
+  namespace: demo
+spec:
+  workspaces:
+    - name: persistent-storage
+    - name: image-storage
+  tasks:
+    # setup
+    - name: setup-tools
+      taskRef:
+        name: setup-install-tools
+      workspaces:
+        - name: workspace
+          workspace: persistent-storage
+    - name: setup-git
+      taskRef:
+        name: setup-git-clone
+      workspaces:
+        - name: workspace
+          workspace: persistent-storage
+      runAfter:
+        - setup-tools
+      params:
+        - name: gitRepo
+          value: https://github.com/scottd018/rosa-application-lifecycle-demo.git
+
+    # unit test
+    - name: unit-test
+      taskRef:
+        name: test-unit-go
+      workspaces:
+        - name: workspace
+          workspace: persistent-storage
+      runAfter:
+        - setup-git
+
+    # e2e test
+    - name: e2e-test
+      taskRef:
+        name: test-e2e-knative
+      workspaces:
+        - name: workspace
+          workspace: persistent-storage
+        - name: images
+          workspace: image-storage
+      runAfter:
+        - unit-test
