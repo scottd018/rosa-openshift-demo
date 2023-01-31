@@ -10,14 +10,20 @@ spec:
       type: string
       default: /workspace/code/demo
       description: |
-        The folder to use for building the knative image.
+        The folder which contains the knative function code and is used to 
+        build the image.
+    - name: makeDirectory
+      type: string
+      default: /workspace/code
+      description: |
+        The folder which contains the make targets to build, run and deploy knative function.
   steps:
     - name: build-knative-image
       image: quay.io/podman/stable:v4.3.1
       script: |
         #!/usr/bin/env bash
         set -e
-        cd /workspace/code
+        cd $(params.makeDirectory)
         dnf install -y make
         make build
   stepTemplate:

@@ -6,6 +6,11 @@ metadata:
   namespace: demo
 spec:
   params:
+    - name: knativeBinaryLocation
+      type: string
+      default: /workspace/bin
+      description: |
+        Location where knative tooling is placed.  Should be located in the path.
     - name: knativeVersion
       type: string
       default: v1.9.0
@@ -23,11 +28,11 @@ spec:
         #!/usr/bin/env bash
         set -e
         dnf install -y wget
-        mkdir -p /workspace/bin
-        wget https://github.com/knative/client/releases/download/knative-$(params.knativeVersion)/kn-linux-amd64 -O /workspace/bin/kn
-        chmod +x /workspace/bin/kn
-        wget https://github.com/knative/func/releases/download/knative-$(params.knativeFuncVersion)/func_linux_amd64 -O /workspace/bin/kn-func
-        chmod +x /workspace/bin/kn-func
+        mkdir -p $(params.knativeBinaryLocation)
+        wget https://github.com/knative/client/releases/download/knative-$(params.knativeVersion)/kn-linux-amd64 -O $(params.knativeBinaryLocation)/kn
+        chmod +x $(params.knativeBinaryLocation)
+        wget https://github.com/knative/func/releases/download/knative-$(params.knativeFuncVersion)/func_linux_amd64 -O $(params.knativeBinaryLocation)/kn-func
+        chmod +x $(params.knativeBinaryLocation)/kn-func
   workspaces:
     - name: workspace
       mountPath: /workspace

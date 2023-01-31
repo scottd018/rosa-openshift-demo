@@ -5,6 +5,22 @@ metadata:
   name: deploy-knative-function
   namespace: demo
 spec:
+  params:
+    - name: workingDir
+      type: string
+      default: /workspace
+      description: |
+        Working directory where work is performed.
+    - name: workingSubDir
+      type: string
+      default: code
+      description: |
+        Working sub-directory where code is downloaded and acted upon.
+    - name: workingDemoDir
+      type: string
+      default: demo
+      description: |
+        Working sub-directory within workingSubDir that contains the knative function code.
   workspaces:
     - name: persistent-storage
     - name: image-storage
@@ -16,6 +32,9 @@ spec:
       workspaces:
         - name: workspace
           workspace: persistent-storage
+      params:
+        - name: knativeBinaryLocation
+          value: "$(params.workingDir)/bin"
     - name: setup-git
       taskRef:
         name: setup-git-clone
@@ -27,6 +46,8 @@ spec:
       params:
         - name: gitRepo
           value: https://github.com/scottd018/rosa-application-lifecycle-demo.git
+        - name: gitRepoDestination
+          value: "$(params.workingDir)/$(workingSubDir)"
 
     # unit test
     - name: unit-test
@@ -37,6 +58,9 @@ spec:
           workspace: persistent-storage
       runAfter:
         - setup-git
+      params:
+        - name: goTestDirectory
+          value: "$(params.workingDir)/$(workingSubDir)/$(workingDemoDir)"
 
     # e2e test
     - name: e2e-test
@@ -49,3 +73,6 @@ spec:
           workspace: image-storage
       runAfter:
         - unit-test
+      params:
+        - name: knativeDirectory
+          value: "$(params.workingDir)/$(workingSubDir)/$(workingDemoDir)"
