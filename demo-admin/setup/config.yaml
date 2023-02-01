@@ -15,7 +15,7 @@ subjects:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: application-lifecycle-demo
+  name: demo-admin
   namespace: openshift-gitops
 spec:
   project: default
