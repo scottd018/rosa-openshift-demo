@@ -1,4 +1,4 @@
-FUNC_DIR ?= demo
+FUNC_DIR ?= demo-app
 
 clean:
 	rm -rf $(FUNC_DIR)
