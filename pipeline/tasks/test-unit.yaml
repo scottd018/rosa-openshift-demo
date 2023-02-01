@@ -13,7 +13,7 @@ spec:
         The folder to use for running the go test
   steps:
     - name: test-unit-go
-      image: registry.access.redhat.com/ubi8/go-toolset:1.18.9-8
+      image: registry.access.redhat.com/ubi9/go-toolset:1.18.9-2.1674497385
       script: |
         #!/usr/bin/env bash
         set -e

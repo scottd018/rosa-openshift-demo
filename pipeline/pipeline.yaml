@@ -47,7 +47,7 @@ spec:
         - name: gitRepo
           value: https://github.com/scottd018/rosa-application-lifecycle-demo.git
         - name: gitRepoDestination
-          value: "$(params.workingDir)/$(workingSubDir)"
+          value: "$(params.workingDir)/$(params.workingSubDir)"
 
     # unit test
     - name: unit-test
@@ -60,7 +60,7 @@ spec:
         - setup-git
       params:
         - name: goTestDirectory
-          value: "$(params.workingDir)/$(workingSubDir)/$(workingDemoDir)"
+          value: "$(params.workingDir)/$(params.workingSubDir)/$(params.workingDemoDir)"
 
     # e2e test
     - name: e2e-test
@@ -75,4 +75,4 @@ spec:
         - unit-test
       params:
         - name: knativeDirectory
-          value: "$(params.workingDir)/$(workingSubDir)/$(workingDemoDir)"
+          value: "$(params.workingDir)/$(params.workingSubDir)/$(params.workingDemoDir)"
