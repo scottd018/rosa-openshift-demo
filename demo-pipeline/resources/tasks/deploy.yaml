@@ -27,9 +27,6 @@ spec:
         cd $(params.makeDirectory)
         dnf install -y make
 
-        # login to the internal registry
-        podman login -u cluster-admin
-
         # run function in the background
         make code-deploy
   stepTemplate:
