@@ -1,9 +1,10 @@
 {
     "yaml.schemas": {
         "https://gist.githubusercontent.com/sargunv/c2ca41a08391cd06feaad97aece309e4/raw/empty-json-schema.json": [
-            "file:///Users/dscott/VSCode/github/scottd018/application-lifecycle-demo/demo-pipeline/tasks/test-e2e.yaml",
-            "file:///Users/dscott/VSCode/github/scottd018/application-lifecycle-demo/demo-pipeline/tasks/test-unit.yaml",
-            "file:///Users/dscott/VSCode/github/scottd018/application-lifecycle-demo/demo-pipeline/tasks/setup.yaml"
+            "file:///Users/dscott/VSCode/github/scottd018/application-lifecycle-demo/demo-pipeline/resources/tasks/test-e2e.yaml",
+            "file:///Users/dscott/VSCode/github/scottd018/application-lifecycle-demo/demo-pipeline/resources/tasks/test-unit.yaml",
+            "file:///Users/dscott/VSCode/github/scottd018/application-lifecycle-demo/demo-pipeline/resources/tasks/setup.yaml",
+            "file:///Users/dscott/VSCode/github/scottd018/application-lifecycle-demo/demo-pipeline/resources/tasks/deploy.yaml"
         ]
     }
 }
