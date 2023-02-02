@@ -1,0 +1,18 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-pipeline
+  namespace: demo-apps
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    path: demo-pipeline/resources
+    directory:
+      recurse: true
+    repoURL: https://github.com/scottd018/rosa-application-lifecycle-demo
+  syncPolicy:
+    automated:
+      selfHeal: true
