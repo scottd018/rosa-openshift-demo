@@ -15,13 +15,15 @@ spec:
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
-  name: openshift-serverless-operator
+  name: openshift-serverless-operator-rh
   namespace: openshift-operators
 spec:
   channel: stable
-  name: openshift-serverless-operator
+  installPlanApproval: Automatic
+  name: serverless-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+  startingCSV: serverless-operator.v1.26.0
 ---
 apiVersion: project.openshift.io/v1
 kind: Project
