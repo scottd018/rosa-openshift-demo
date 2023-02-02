@@ -12,7 +12,6 @@ help:
 	@echo "developer tasks:"
 	@grep -E '[a-zA-Z\.\-]+:.*?@ .*$$' $(MAKEFILE_LIST)| tr -d '#' | grep 'code-' | awk -F'{code-}' '{print $$1}' | awk 'BEGIN {FS = ":.*?@ "}; {printf "\t\033[31m%-30s\033[0m %s\n", $$1, $$2}'
 
-
 #
 # admin tasks
 #
