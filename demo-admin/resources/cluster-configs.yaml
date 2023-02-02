@@ -63,4 +63,8 @@ kind: KnativeServing
 metadata:
   name: knative-serving
   namespace: knative-serving
-spec: {}
+spec:
+  controller-custom-certs:
+    name: ''
+    type: ''
+  registry: {}
