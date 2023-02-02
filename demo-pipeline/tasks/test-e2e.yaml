@@ -26,7 +26,7 @@ spec:
         export PATH="${PATH}:/workspace/bin"
         cd $(params.makeDirectory)
         dnf install -y make
-        make build
+        make code-build
     - name: test-knative-function
       image: registry.access.redhat.com/ubi9/podman:9.1.0-12
       script: |
@@ -37,14 +37,14 @@ spec:
         dnf install -y make
 
         # run function in the background
-        make run &
+        make code-run &
         RUN_PID=$!
 
         # allow function to properly start
         sleep 2
 
         # invoke function
-        make test-e2e-good
+        make code-test-e2e-good
 
         kill $RUN_PID
   stepTemplate:
