@@ -3,13 +3,16 @@
 #help: @ List available tasks on this project
 .PHONY: help
 help:
-	@echo "help tasks:"
+	@echo "HELP TASKS:"
+	@echo "==========="
 	@grep -E '[a-zA-Z\.\-]+:.*?@ .*$$' $(MAKEFILE_LIST)| tr -d '#' | grep 'help' | awk 'BEGIN {FS = ":.*?@ "}; {printf "\t\033[33m%-30s\033[0m %s\n", $$1, $$2}'
 	@echo
-	@echo "admin tasks:"
+	@echo "ADMIN TASKS:"
+	@echo "============"
 	@grep -E '[a-zA-Z\.\-]+:.*?@ .*$$' $(MAKEFILE_LIST)| tr -d '#' | grep 'admin-' | awk -F'{admin-}' '{print $$1}' | awk 'BEGIN {FS = ":.*?@ "}; {printf "\t\033[32m%-30s\033[0m %s\n", $$1, $$2}'
 	@echo
-	@echo "developer tasks:"
+	@echo "DEVELOPER TASKS:"
+	@echo "================"
 	@grep -E '[a-zA-Z\.\-]+:.*?@ .*$$' $(MAKEFILE_LIST)| tr -d '#' | grep 'code-' | awk -F'{code-}' '{print $$1}' | awk 'BEGIN {FS = ":.*?@ "}; {printf "\t\033[31m%-30s\033[0m %s\n", $$1, $$2}'
 
 #
