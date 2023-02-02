@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: demo-pipeline
-  namespace: demo-apps
+  namespace: openshift-gitops
 spec:
   project: default
   destination:
