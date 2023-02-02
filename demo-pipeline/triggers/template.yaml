@@ -15,7 +15,7 @@ spec:
         namespace: demo-pipeline
       spec:
         pipelineRef:
-          name: deploy-knative-function
+          name: deploy-knative-go-function
         params:
           - name: gitRepo
             value: "$(params.gitRepo)"
@@ -35,4 +35,4 @@ spec:
                   - ReadWriteOnce
                 resources:
                   requests:
-                    storage: 5Gi
+                    storage: 2Gi
