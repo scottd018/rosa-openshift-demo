@@ -34,7 +34,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: pipeline-privileged
+  name: pipeline-admin
   namespace: demo-pipeline
 roleRef:
   apiGroup: rbac.authorization.k8s.io
