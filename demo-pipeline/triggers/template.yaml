@@ -18,7 +18,7 @@ spec:
           name: deploy-knative-go-function
         params:
           - name: gitRepo
-            value: "$(params.gitRepo)"
+            value: "$(tt.params.gitRepo)"
         workspaces:
           - name: persistent-storage
             volumeClaimTemplate:
