@@ -1,8 +1,8 @@
 specVersion: 0.35.0
 name: demo-app
 runtime: go
-registry: image-registry.openshift-image-registry.svc:5000/demo-pipeline
-image: ""
+registry: image-registry.openshift-image-registry.svc:5000/demo-app
+image: image-registry.openshift-image-registry.svc:5000/demo-app/demo-app:latest
 imageDigest: ""
 created: 2023-02-01T15:08:57.595652-06:00
 build:
