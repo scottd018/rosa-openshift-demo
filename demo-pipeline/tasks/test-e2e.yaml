@@ -18,15 +18,6 @@ spec:
       description: |
         The folder which contains the make targets to build, run and deploy knative function.
   steps:
-    - name: build-knative-image
-      image: registry.access.redhat.com/ubi9/podman:9.1.0-12
-      script: |
-        #!/usr/bin/env bash
-        set -e
-        export PATH="${PATH}:/workspace/bin"
-        cd $(params.makeDirectory)
-        dnf install -y make
-        make build
     - name: test-knative-function
       image: registry.access.redhat.com/ubi9/podman:9.1.0-12
       script: |
@@ -35,6 +26,9 @@ spec:
         export PATH="${PATH}:/workspace/bin"
         cd $(params.makeDirectory)
         dnf install -y make
+
+        # build function
+        make build
 
         # run function in the background
         make run &
