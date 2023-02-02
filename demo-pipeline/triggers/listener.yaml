@@ -1,0 +1,21 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: demo-github
+  namespace: demo-pipeline
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - name: demo-github
+      interceptors:
+        - github:
+            secretRef:
+              secretName: demo-github-secret
+              secretKey: secretToken
+            eventTypes:
+              - push
+      bindings:
+        - ref: demo-github
+      template:
+        name: demo-github

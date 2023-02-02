@@ -1,0 +1,38 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: demo-github
+  namespace: demo-pipeline
+spec:
+  params:
+    - name: gitRepo
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: demo-app-
+        namespace: demo-pipeline
+      spec:
+        pipelineRef:
+          name: deploy-knative-function
+        params:
+          - name: gitRepo
+            value: "$(params.gitRepo)"
+        workspaces:
+          - name: persistent-storage
+            volumeClaimTemplate:
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 100Mi
+          - name: image-storage
+            volumeClaimTemplate:
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: 5Gi

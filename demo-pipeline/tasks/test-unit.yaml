@@ -1,0 +1,24 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test-unit-go
+  namespace: demo-pipeline
+spec:
+  params:
+    - name: goTestDirectory
+      type: string
+      default: /workspace/code/demo-app
+      description: |
+        The folder to use for running the go test
+  steps:
+    - name: test-unit-go
+      image: registry.access.redhat.com/ubi9/go-toolset:1.18.9-2.1674497385
+      script: |
+        #!/usr/bin/env bash
+        set -e
+        cd $(params.goTestDirectory)
+        go test
+  workspaces:
+    - name: workspace
+      mountPath: /workspace

@@ -1,0 +1,64 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: setup-install-tools
+  namespace: demo-pipeline
+spec:
+  params:
+    - name: knativeBinaryLocation
+      type: string
+      default: /workspace/bin
+      description: |
+        Location where knative tooling is placed.  Should be located in the path.
+    - name: knativeVersion
+      type: string
+      default: v1.9.0
+      description: |
+        The version of kn to install
+    - name: knativeFuncVersion
+      type: string
+      default: v1.9.0
+      description: |
+        The version of the kn func plugin to install
+  steps:
+    - name: setup-install-knative-tools
+      image: registry.access.redhat.com/ubi9/s2i-base:1-410.1674496682
+      script: |
+        #!/usr/bin/env bash
+        set -e
+        mkdir -p $(params.knativeBinaryLocation)
+        wget https://github.com/knative/client/releases/download/knative-$(params.knativeVersion)/kn-linux-amd64 -O $(params.knativeBinaryLocation)/kn
+        chmod +x $(params.knativeBinaryLocation)/kn
+        wget https://github.com/knative/func/releases/download/knative-$(params.knativeFuncVersion)/func_linux_amd64 -O $(params.knativeBinaryLocation)/kn-func
+        chmod +x $(params.knativeBinaryLocation)/kn-func
+  workspaces:
+    - name: workspace
+      mountPath: /workspace
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: setup-git-clone
+  namespace: demo-pipeline
+spec:
+  params:
+    - name: gitRepo
+      type: string
+      description: |
+        The url of the public git repo to clone
+    - name: gitRepoDestination
+      type: string
+      default: /workspace/code
+      description: |
+        The destination folder inside of the workspace where the repo is downloaded
+  steps:
+    - name: setup-git-clone
+      image: registry.access.redhat.com/ubi9/s2i-base:1-410.1674496682
+      script: |
+        #!/usr/bin/env bash
+        set -e
+        git clone $(params.gitRepo) $(params.gitRepoDestination)
+  workspaces:
+    - name: workspace
+      mountPath: /workspace

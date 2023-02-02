@@ -1,0 +1,29 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: demo-app-
+  namespace: demo-pipeline
+spec:
+  pipelineRef:
+    name: deploy-knative-go-function
+  params:
+    - name: gitRepo
+      value: https://github.com/scottd018/rosa-application-lifecycle-demo.git
+  workspaces:
+    - name: persistent-storage
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Mi
+    - name: image-storage
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5Gi

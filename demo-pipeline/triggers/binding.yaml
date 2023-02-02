@@ -1,0 +1,12 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: demo-github
+  namespace: demo-pipeline
+spec:
+  params:
+    - name: gitRepo
+      value: $(body.repository.clone_url)
+    # - name: image-full-path-with-tag
+    #   value: image-registry.openshift-image-registry.svc:5000/tekton-demo/spring-boot-docker:v1.1.0
