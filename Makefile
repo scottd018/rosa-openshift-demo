@@ -27,7 +27,9 @@ test-e2e-good:
 	kn func invoke -p $(FUNC_DIR) --data '{"name": "chicka chicka slim shady"}'
 
 admin-install:
-	oc apply -f $(ADMIN_DIR)/setup/install.yaml
+	@echo "installing gitops operator (argo)"
+	@oc apply -f $(ADMIN_DIR)/setup/install.yaml
 
 admin-config:
-	
+	@echo "installing cluster configs from git"
+	@oc apply -f $(ADMIN_DIR)/setup/config.yaml
