@@ -40,7 +40,7 @@ code-clean:
 #code-create: @ Create a new microservice
 code-create: clean
 	@echo "creating a new microservice"
-	@kn func create -l go $(APP_NAME)
+	@kn func create -l go $(APP_NAME) -v
 
 #code-write: @ Simulate a developer writing a new microservice with an example from the 'snippets/' directory
 code-write:
@@ -56,17 +56,17 @@ code-test-unit:
 #code-build: @ Build the microservice as a container image
 code-build:
 	@echo "building microservice"
-	@kn func build -p $(APP_NAME)
+	@kn func build -p $(APP_NAME) -v
 
 #code-run: @ Run the microservice locally
 code-run:
 	@echo "running code"
-	@kn func run -p $(APP_NAME) --build=false
+	@kn func run -p $(APP_NAME) --build=false -v
 
 #code-test-e2e-good: @ Simulate a successful test against a local microservice run
 code-test-e2e-good:
 	@echo "testing successful microservice request"
-	@kn func invoke -p $(APP_NAME) --data '{"name": "chicka chicka slim shady"}' -vvvvvvvvvvv
+	@kn func invoke -p $(APP_NAME) --data '{"name": "chicka chicka slim shady"}' -v
 
 #code-test-e2e-bad: @ Simulate an unsuccessful test against a local microservice run
 code-test-e2e-bad:
@@ -76,4 +76,4 @@ code-test-e2e-bad:
 #code-deploy: @ Deploy the microservice to a cluster
 code-deploy:
 	@echo "deploying microservice"
-	@kn func deploy -p $(APP_NAME) -n $(APP_NAME)
+	@kn func deploy -p $(APP_NAME) -n $(APP_NAME) -v
