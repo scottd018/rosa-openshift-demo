@@ -80,3 +80,18 @@ spec:
       params:
         - name: knativeDirectory
           value: "$(params.workingDir)/$(params.workingSubDir)/$(params.workingDemoDir)"
+
+    # deploy
+    - name: deploy
+      taskRef:
+        name: deploy-knative
+      workspaces:
+        - name: workspace
+          workspace: persistent-storage
+        - name: images
+          workspace: image-storage
+      runAfter:
+        - e2e-test
+      params:
+        - name: knativeDirectory
+          value: "$(params.workingDir)/$(params.workingSubDir)/$(params.workingDemoDir)"

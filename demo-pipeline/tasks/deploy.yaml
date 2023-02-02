@@ -1,0 +1,40 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: deploy-knative
+  namespace: demo-pipeline
+spec:
+  params:
+    - name: knativeDirectory
+      type: string
+      default: /workspace/code/demo-app
+      description: |
+        The folder which contains the knative function code and is used to 
+        build the image.
+    - name: makeDirectory
+      type: string
+      default: /workspace/code
+      description: |
+        The folder which contains the make targets to build, run and deploy knative function.
+  steps:
+    - name: deploy-knative-function
+      image: registry.access.redhat.com/ubi9/podman:9.1.0-12
+      script: |
+        #!/usr/bin/env bash
+        set -e
+        export PATH="${PATH}:/workspace/bin"
+        cd $(params.makeDirectory)
+        dnf install -y make
+
+        # run function in the background
+        make code-deploy
+  stepTemplate:
+    securityContext:
+      runAsUser: 0
+      privileged: true
+  workspaces:
+    - name: images
+      mountPath: /var/lib/containers
+    - name: workspace
+      mountPath: /workspace
