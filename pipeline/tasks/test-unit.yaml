@@ -3,12 +3,12 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: test-unit-go
-  namespace: demo
+  namespace: demo-app
 spec:
   params:
     - name: goTestDirectory
       type: string
-      default: /workspace/code/demo
+      default: /workspace/code/demo-app
       description: |
         The folder to use for running the go test
   steps:

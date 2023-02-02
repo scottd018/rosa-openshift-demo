@@ -3,7 +3,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: deploy-knative-function
-  namespace: demo
+  namespace: demo-app
 spec:
   params:
     - name: workingDir
@@ -18,7 +18,7 @@ spec:
         Working sub-directory where code is downloaded and acted upon.
     - name: workingDemoDir
       type: string
-      default: demo
+      default: demo-app
       description: |
         Working sub-directory within workingSubDir that contains the knative function code.
   workspaces:

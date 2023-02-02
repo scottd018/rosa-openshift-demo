@@ -3,7 +3,7 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   generateName: pipeline-
-  namespace: demo
+  namespace: demo-app
 spec:
   pipelineRef:
     name: deploy-knative-function

@@ -1,4 +1,5 @@
 FUNC_DIR ?= demo-app
+ADMIN_DIR ?= demo-admin
 
 clean:
 	rm -rf $(FUNC_DIR)
@@ -24,3 +25,9 @@ test-e2e-bad:
 
 test-e2e-good:
 	kn func invoke -p $(FUNC_DIR) --data '{"name": "chicka chicka slim shady"}'
+
+admin-install:
+	oc apply -f $(ADMIN_DIR)/setup/install.yaml
+
+admin-config:
+	

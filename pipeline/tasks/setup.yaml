@@ -3,7 +3,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: setup-install-tools
-  namespace: demo
+  namespace: demo-app
 spec:
   params:
     - name: knativeBinaryLocation
@@ -40,7 +40,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: setup-git-clone
-  namespace: demo
+  namespace: demo-app
 spec:
   params:
     - name: gitRepo

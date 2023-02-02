@@ -3,12 +3,12 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: test-e2e-knative
-  namespace: demo
+  namespace: demo-app
 spec:
   params:
     - name: knativeDirectory
       type: string
-      default: /workspace/code/demo
+      default: /workspace/code/demo-app
       description: |
         The folder which contains the knative function code and is used to 
         build the image.
