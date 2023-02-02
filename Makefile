@@ -24,7 +24,7 @@ test-e2e-bad:
 	curl -X GET localhost:8080
 
 test-e2e-good:
-	kn func invoke -p $(FUNC_DIR) --data '{"name": "chicka chicka slim shady"}'
+	kn func invoke -p $(FUNC_DIR) --data '{"name": "chicka chicka slim shady"}' -vvvvvvvvvvv
 
 admin-install:
 	@echo "installing gitops operator (argo)"
