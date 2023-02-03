@@ -45,10 +45,9 @@ subjects:
     namespace: demo-pipeline
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: pipeline-admin
-  namespace: demo-pipeline
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -57,20 +56,20 @@ subjects:
   - kind: ServiceAccount
     name: pipeline
     namespace: demo-pipeline
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: pipeline-registry-admin
-  namespace: demo-pipeline
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: registry-admin
-subjects:
-  - kind: ServiceAccount
-    name: pipeline
-    namespace: demo-pipeline
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: pipeline-registry-admin
+#   namespace: demo-pipeline
+# roleRef:
+#   apiGroup: rbac.authorization.k8s.io
+#   kind: ClusterRole
+#   name: registry-admin
+# subjects:
+#   - kind: ServiceAccount
+#     name: pipeline
+#     namespace: demo-pipeline
 ---
 apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing

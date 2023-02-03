@@ -1,8 +1,8 @@
 specVersion: 0.35.0
 name: demo-app
 runtime: go
-registry: image-registry.openshift-image-registry.svc:5000/demo-pipeline
-image: image-registry.openshift-image-registry.svc:5000/demo-pipeline/demo-app:latest
+registry: image-registry.openshift-image-registry.svc:5000/demo-app
+image: image-registry.openshift-image-registry.svc:5000/demo-app/demo-app:latest
 imageDigest: sha256:a221641594d476c564249ff9a70d1868d95291e1ac8cd4a53701a508daf2fd19
 created: 2023-02-01T15:08:57.595652-06:00
 build:
@@ -15,7 +15,7 @@ run:
   volumes: []
   envs: []
 deploy:
-  namespace: demo-pipeline
+  namespace: demo-app
   remote: false
   annotations: {}
   options: {}
