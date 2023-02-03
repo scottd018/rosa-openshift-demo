@@ -29,9 +29,14 @@ spec:
 
         # login to the registry using the service account token
         podman login \
+          --verbose \
+          --tls-verify=false \
           --username=cluster-admin \
           --password="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
           image-registry.openshift-image-registry.svc:5000
+
+        # print login info
+        podman login --get-login image-registry.openshift-image-registry.svc:5000
 
         # run function in the background
         make code-deploy
