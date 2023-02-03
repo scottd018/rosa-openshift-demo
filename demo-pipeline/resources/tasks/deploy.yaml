@@ -29,7 +29,7 @@ spec:
 
         # login to the registry using the service account token
         podman login \
-          --user=cluster-admin \
+          --username=cluster-admin \
           --password="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
           image-registry.openshift-image-registry.svc:5000
 
