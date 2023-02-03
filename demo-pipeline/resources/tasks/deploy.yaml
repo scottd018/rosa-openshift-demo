@@ -27,6 +27,12 @@ spec:
         cd $(params.makeDirectory)
         dnf install -y make
 
+        # login to the registry using the service account token
+        podman login \
+          --user=cluster-admin \
+          --password="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+          image-registry.openshift-image-registry.svc:5000
+
         # run function in the background
         make code-deploy
   stepTemplate:
