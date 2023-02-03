@@ -79,4 +79,4 @@ code-test-e2e-bad:
 #code-deploy: @ Deploy the microservice to a cluster
 code-deploy:
 	@echo "deploying microservice"
-	@kn func deploy -p $(APP_NAME) -n $(APP_NAME) -v
+	@kn func deploy -p $(APP_NAME) -n $(APP_NAME) --build=false -v
