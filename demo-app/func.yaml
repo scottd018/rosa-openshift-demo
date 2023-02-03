@@ -3,7 +3,7 @@ name: demo-app
 runtime: go
 registry: image-registry.openshift-image-registry.svc:5000/demo-app
 image: image-registry.openshift-image-registry.svc:5000/demo-app/demo-app:latest
-imageDigest: sha256:ade1e23623897fe3547f729f34715d37559c2c66cf3cf570bbfa4bddb1b56e48
+imageDigest: sha256:a221641594d476c564249ff9a70d1868d95291e1ac8cd4a53701a508daf2fd19
 created: 2023-02-01T15:08:57.595652-06:00
 build:
   buildpacks:

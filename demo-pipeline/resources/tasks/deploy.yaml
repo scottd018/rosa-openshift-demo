@@ -38,6 +38,10 @@ spec:
         # print login info
         podman login --get-login image-registry.openshift-image-registry.svc:5000
 
+        # copy the podman auth file to docker config
+        mkdir -p ~/.docker
+        cp -f /run/containers/0/auth.json ~/.docker/config.json
+
         # run function in the background
         make code-deploy
   stepTemplate:
