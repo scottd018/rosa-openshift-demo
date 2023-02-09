@@ -31,21 +31,21 @@ ADMIN_DIR ?= demo-admin
 
 #admin-cluster-create: @ Create cluster for demo
 admin-cluster-create:
-    rosa create cluster \
-        --cluster-name="$(CLUSTER_NAME)" \
-        --sts \
-        --multi-az \
-        --enable-autoscaling \
-        --version="$(CLUSTER_OCP_VERSION)" \
-        --min-replicas=3 \
-        --max-replicas=6 \
-        --compute-machine-type="t3.xlarge" \
-        --machine-cidr="10.10.0.0/16" \
-        --service-cidr="172.30.0.0/16" \
-        --pod-cidr="10.128.0.0/14" \
-        --host-prefix=23 \
-        --mode=auto \
-        -y
+	rosa create cluster \
+        	--cluster-name="$(CLUSTER_NAME)" \
+        	--sts \
+        	--multi-az \
+        	--enable-autoscaling \
+        	--version="$(CLUSTER_OCP_VERSION)" \
+        	--min-replicas=3 \
+        	--max-replicas=6 \
+        	--compute-machine-type="t3.xlarge" \
+        	--machine-cidr="10.10.0.0/16" \
+        	--service-cidr="172.30.0.0/16" \
+        	--pod-cidr="10.128.0.0/14" \
+        	--host-prefix=23 \
+        	--mode=auto \
+        	-y
 
 #admin-auth-setup: @ Setup cluster authentication prior to install/config
 admin-auth-setup:
@@ -128,7 +128,9 @@ code-test-e2e-bad:
 #code-pipeline-deploy: @ Deploy the pipeline to a cluster
 code-pipeline-deploy:
 	@echo "deploying pipeline"
-	@oc apply -f demo-pipeline/gitops.yaml
+	@oc apply -f demo-pipeline/resources/tasks/
+	@oc apply -f demo-pipeline/resources/triggers/
+	@oc apply -f demo-pipeline/resources/pipeline.yaml
 
 #code-deploy: @ Deploy the microservice to a cluster
 code-deploy:
