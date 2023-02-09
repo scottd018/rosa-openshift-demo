@@ -62,6 +62,8 @@ kind: KnativeServing
 metadata:
   name: knative-serving
   namespace: knative-serving
+  annotations:
+    argocd.argoproj.io/hook: PreSync
 spec:
   controller-custom-certs:
     name: ''
