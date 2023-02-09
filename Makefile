@@ -87,10 +87,10 @@ APP_NAME ?= demo-app
 #code-clean: @ Delete the microservice code
 code-clean:
 	@echo "deleting current microservice"
-	@rm -rf $(APP_NAME)
+	@rm -rf $(APP_NAME)/*
 
 #code-create: @ Create a new microservice
-code-create: clean
+code-create: code-clean
 	@echo "creating a new microservice"
 	@kn func create -l go $(APP_NAME) -v
 

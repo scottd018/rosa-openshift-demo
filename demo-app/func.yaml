@@ -3,8 +3,8 @@ name: demo-app
 runtime: go
 registry: image-registry.openshift-image-registry.svc:5000/demo-app
 image: image-registry.openshift-image-registry.svc:5000/demo-app/demo-app:latest
-imageDigest: sha256:a221641594d476c564249ff9a70d1868d95291e1ac8cd4a53701a508daf2fd19
-created: 2023-02-01T15:08:57.595652-06:00
+imageDigest: sha256:9306f3ee4371bf0f89fb104cd98b0bf8eba8bef98d33231141e9a1a6ad007833
+created: 2023-02-09T14:33:32.932173-06:00
 build:
   buildpacks:
   - paketo-buildpacks/go-dist
