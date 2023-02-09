@@ -1,5 +1,13 @@
 .DEFAULT_GOAL := help
 
+CLUSTER_ID ?= eq4v
+CLUSTER_NAME ?= poc-dscott
+demo-setup:
+	@chrome_open_window --incognito "https://console-openshift-console.apps.$(CLUSTER_NAME).$(CLUSTER_ID).p1.openshiftapps.com/"
+	@chrome_open_window "https://console-openshift-console.apps.$(CLUSTER_NAME).$(CLUSTER_ID).p1.openshiftapps.com/"
+	@sleep 3
+	@chrome_open_tab "https://github.com/scottd018/rosa-openshift-demo"
+
 #help: @ List available tasks on this project
 .PHONY: help
 help:
@@ -19,6 +27,48 @@ help:
 # admin tasks
 #
 ADMIN_DIR ?= demo-admin
+ROSA_CLUSTER_NAME ?= dscott-dry-run-1
+ROSA_CLUSTER_OCP_VERSION ?= 4.11.25
+
+#admin-cluster-create: @ Create cluster for demo
+admin-cluster-create:
+    rosa create cluster \
+        --cluster-name="$(ROSA_CLUSTER_NAME)" \
+        --sts \
+        --multi-az \
+        --enable-autoscaling \
+        --version="$(ROSA_CLUSTER_OCP_VERSION)" \
+        --min-replicas=3 \
+        --max-replicas=6 \
+        --compute-machine-type="t3.xlarge" \
+        --machine-cidr="10.10.0.0/16" \
+        --service-cidr="172.30.0.0/16" \
+        --pod-cidr="10.128.0.0/14" \
+        --host-prefix=23 \
+        --mode=auto \
+        -y
+
+#admin-auth-setup: @ Setup cluster authentication prior to install/config
+admin-auth-setup:
+	@echo "setting up 'admin' account (htpasswd auth)"
+	@rosa create idp \
+		--cluster=$(CLUSTER_NAME) \
+		--name=admin \
+		--type=htpasswd \
+		--username=admin \
+		--password="$$(bw get password rosa-admin-password)"
+	@rosa grant user cluster-admin \
+		--user=admin \
+		--cluster=$(CLUSTER_NAME)
+
+	@echo "setting up 'developer' account (gitlab auth)"
+	@rosa create idp \
+		--cluster=$(CLUSTER_NAME) \
+		--name=developer \
+		--type=gitlab \
+		--host-url="$$(bw get uri rosa-gitlab-token)" \
+		--client-id="$$(bw get username rosa-gitlab-token)" \
+		--client-secret="$$(bw get password rosa-gitlab-token)"
 
 #admin-install: @ Install the GitOps Operator
 admin-install:
