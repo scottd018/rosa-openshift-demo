@@ -37,7 +37,7 @@ func Handle(ctx context.Context, res http.ResponseWriter, req *http.Request) {
 
 		// print the message and return a status ok
 		res.WriteHeader(http.StatusOK)
-		res.Write([]byte(fmt.Sprintf("hi, my name is: %s\n", body.Name)))
+		res.Write([]byte(fmt.Sprintf("v1, hi, my name is: %s\n", body.Name)))
 	default:
 		res.WriteHeader(http.StatusInternalServerError)
 		res.Write([]byte(fmt.Sprintf("method [%s] unimplemented\n", req.Method)))
