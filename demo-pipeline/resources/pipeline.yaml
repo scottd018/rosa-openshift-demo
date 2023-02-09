@@ -3,7 +3,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: deploy-knative-go-function
-  namespace: demo-pipeline
+  namespace: demo-app
 spec:
   params:
     - name: gitRepo

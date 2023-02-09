@@ -125,6 +125,11 @@ code-test-e2e-bad:
 	@echo "testing unsuccessful microservice request"
 	@curl -X GET localhost:8080
 
+#code-pipeline-deploy: @ Deploy the pipeline to a cluster
+code-pipeline-deploy:
+	@echo "deploying pipeline"
+	@oc apply -f demo-pipeline/gitops.yaml
+
 #code-deploy: @ Deploy the microservice to a cluster
 code-deploy:
 	@echo "deploying microservice"

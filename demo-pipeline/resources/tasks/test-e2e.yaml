@@ -3,7 +3,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: test-e2e-knative
-  namespace: demo-pipeline
+  namespace: demo-app
 spec:
   params:
     - name: knativeDirectory

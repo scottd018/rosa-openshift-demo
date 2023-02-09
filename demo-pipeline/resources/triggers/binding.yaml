@@ -3,7 +3,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
   name: demo-github
-  namespace: demo-pipeline
+  namespace: demo-app
 spec:
   params:
     - name: gitRepo

@@ -3,7 +3,7 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
   name: demo-github
-  namespace: demo-pipeline
+  namespace: demo-app
 spec:
   params:
     - name: gitRepo
@@ -12,7 +12,7 @@ spec:
       kind: PipelineRun
       metadata:
         generateName: demo-app-
-        namespace: demo-pipeline
+        namespace: demo-app
       spec:
         pipelineRef:
           name: deploy-knative-go-function
