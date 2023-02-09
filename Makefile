@@ -2,6 +2,7 @@
 
 CLUSTER_ID ?= eq4v
 CLUSTER_NAME ?= poc-dscott
+CLUSTER_OCP_VERSION ?= 4.11.25
 demo-setup:
 	@chrome_open_window --incognito "https://console-openshift-console.apps.$(CLUSTER_NAME).$(CLUSTER_ID).p1.openshiftapps.com/"
 	@chrome_open_window "https://console-openshift-console.apps.$(CLUSTER_NAME).$(CLUSTER_ID).p1.openshiftapps.com/"
@@ -27,17 +28,15 @@ help:
 # admin tasks
 #
 ADMIN_DIR ?= demo-admin
-ROSA_CLUSTER_NAME ?= dscott-dry-run-1
-ROSA_CLUSTER_OCP_VERSION ?= 4.11.25
 
 #admin-cluster-create: @ Create cluster for demo
 admin-cluster-create:
     rosa create cluster \
-        --cluster-name="$(ROSA_CLUSTER_NAME)" \
+        --cluster-name="$(CLUSTER_NAME)" \
         --sts \
         --multi-az \
         --enable-autoscaling \
-        --version="$(ROSA_CLUSTER_OCP_VERSION)" \
+        --version="$(CLUSTER_OCP_VERSION)" \
         --min-replicas=3 \
         --max-replicas=6 \
         --compute-machine-type="t3.xlarge" \
