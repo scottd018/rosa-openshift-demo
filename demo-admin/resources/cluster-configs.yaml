@@ -64,6 +64,7 @@ metadata:
   namespace: knative-serving
   annotations:
     argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   controller-custom-certs:
     name: ''
