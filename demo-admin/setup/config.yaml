@@ -15,15 +15,15 @@ subjects:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: demo-admin
+  name: cluster-configs
   namespace: openshift-gitops
 spec:
   project: default
+  source:
+    repoURL: https://github.com/scottd018/rosa-application-lifecycle-demo
+    path: demo-admin/resources
   destination:
     server: https://kubernetes.default.svc
-  source:
-    path: demo-admin/resources
-    repoURL: https://github.com/scottd018/rosa-application-lifecycle-demo
   syncPolicy:
     automated:
       selfHeal: true
