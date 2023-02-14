@@ -36,6 +36,8 @@ brew install openshift-cli
 
 ## Commands
 
+### Admin
+
 1. Create a cluster:
 
 ```
@@ -46,4 +48,42 @@ make admin-cluster-create
 
 ```
 make admin-auth-setup
+```
+
+3. Enable Serverless/Pipelines Operators:
+
+```
+make admin-operators-install
+```
+
+4. Enable Knative (serverless):
+
+```
+make admin-knative-config
+```
+
+### Developer
+
+1. Create a project:
+
+```
+oc create project demo-app
+```
+
+2. Deploy the pipeline:
+
+```
+make code-pipeline-deploy
+```
+
+3. Run the pipeline to deploy the code:
+
+```
+make code-pipeline-run
+```
+
+4. Update the code, push the code, and witness the changes to the application:
+
+```
+watch oc get pods -n demo-app
 ```

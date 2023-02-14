@@ -63,15 +63,25 @@ admin-auth-setup:
 		--client-id="$$(bw get username rosa-gitlab-token)" \
 		--client-secret="$$(bw get password rosa-gitlab-token)"
 
-#admin-install: @ Install the GitOps Operator
-admin-install:
+#admin-gitops-install: @ Install the GitOps Operator
+admin-gitops-install:
 	@echo "installing gitops operator (argo)"
 	@oc apply -f $(ADMIN_DIR)/setup/install.yaml
 
-#admin-config: @ Configure the GitOps Operator to point at cluster configs in Git
-admin-config:
+#admin-gitops-config: @ Configure the GitOps Operator to point at cluster configs in Git
+admin-gitops-config:
 	@echo "installing cluster configs from git"
 	@oc apply -f $(ADMIN_DIR)/setup/config.yaml
+
+#admin-operators-install: @ Install the Serverless/Pipelines operators (non GitOps workflow)
+admin-operators-install:
+	@echo "installing serverless/pipeline operator"
+	@oc apply -f $(ADMIN_DIR)/resources/cluster-configs.yaml
+
+#admin-knative-config: @ Configure Knative
+admin-knative-config:
+	@echo "configuring the knative operator"
+	@oc apply -f $(ADMIN_DIR)/resources/knative-configs.yaml
 
 #
 # developer tasks
@@ -125,6 +135,11 @@ code-pipeline-deploy:
 	@oc apply -f demo-pipeline/resources/tasks/
 	@oc apply -f demo-pipeline/resources/triggers/
 	@oc apply -f demo-pipeline/resources/pipeline.yaml
+
+#code-pipeline-run: @ Run the pipeline against a cluster
+code-pipeline-run:
+	@echo "running pipeline"
+	@oc create -f demo-pipeline/tests/pipeline-run.yaml
 
 #code-deploy: @ Deploy the microservice to a cluster
 code-deploy:
