@@ -2,7 +2,7 @@
 
 CLUSTER_ID ?= eq4v
 ROSA_CLUSTER_NAME ?= poc-dscott
-ROSA_CLUSTER_OCP_VERSION ?= 4.11.25
+ROSA_CLUSTER_OCP_VERSION ?= 4.12.0
 demo-setup:
 	@chrome_open_window --incognito "https://console-openshift-console.apps.$(ROSA_CLUSTER_NAME).$(CLUSTER_ID).p1.openshiftapps.com/"
 	@chrome_open_window "https://console-openshift-console.apps.$(ROSA_CLUSTER_NAME).$(CLUSTER_ID).p1.openshiftapps.com/"
