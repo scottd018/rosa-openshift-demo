@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 ROSA_CLUSTER_NAME ?= poc-dscott
-ROSA_CLUSTER_OCP_VERSION ?= 4.11.25
+ROSA_CLUSTER_OCP_VERSION ?= 4.12.0
 
 #help: @ List available tasks on this project
 .PHONY: help
